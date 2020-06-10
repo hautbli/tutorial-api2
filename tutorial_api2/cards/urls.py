@@ -8,4 +8,5 @@ router.register(r'card', CardViewSet, basename='card')
 
 urlpatterns = [
     path('', include(router.urls)),
+
 ]
