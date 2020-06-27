@@ -7,18 +7,19 @@ from cards.models import Card
 from cards.permissions import IsOwnerOrReadOnly
 from cards.serializers import CardSerializer
 
+
 class CardPagination(CursorPagination):
     ordering = '-id'
+
 
 class CardViewSet(viewsets.ModelViewSet):
     queryset = Card.objects.all()
     serializer_class = CardSerializer
-    pagination_class =CardPagination
+    pagination_class = CardPagination
 
     # permission_classes = [IsAuthenticatedOrReadOnly, ]
     permission_classes = [IsAuthenticated,
                           IsOwnerOrReadOnly]
-
 
     def create(self, request, *args, **kwargs):
         request.data['user'] = request.user.id
